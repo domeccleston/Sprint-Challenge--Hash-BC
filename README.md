@@ -26,6 +26,9 @@ Explain in detail the workings of a dynamic array:
 * What is the runtime complexity to access an array, add or remove from the front, and add or remove from the back?
 * What is the worse case scenario if you try to extend the storage size of a dynamic array?
 
+ - A dynamic array is an array which resizes itself automatically. This makes it more convenient to work with
+ than a static array, although dynamic arrays are implemented using static arrays under the hood. Adding or removing to the front of the array is O(1). Adding or removing from the back of array would ordinarily be O(1), but can be O(n) if the array is at capacity and needs to be resized and the values copied over. However, the amortized time is O(1).
+
 Explain how a blockchain is structured. What are the blocks, what is the chain? How is the data organized?
  
 Explain how proof of work functions. How does it operate. How does this protect the chain from attack. What kind of attack is possible?
