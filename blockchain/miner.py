@@ -6,7 +6,7 @@ import sys
 from uuid import uuid4
 
 from timeit import default_timer as timer
-
+import json
 import random
 
 
@@ -23,12 +23,14 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    proof = 0
-    #  TODO: Your code here
+    proof = 10 ** 10
+    encoded_last_proof = f"{last_proof}".encode()
+    hashed_last_proof = hashlib.sha256(encoded_last_proof).hexdigest()
+    while valid_proof(hashed_last_proof, proof) is False:
+        proof += random.getrandbits(32)
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
-
 
 def valid_proof(last_hash, proof):
     """
@@ -39,8 +41,13 @@ def valid_proof(last_hash, proof):
     IE:  last_hash: ...AE9123456, new hash 123456E88...
     """
 
-    # TODO: Your code here!
-    pass
+    guess_proof = f"{proof}".encode()
+
+    # last_hash = str(last_hash)
+
+    hash_proof = hashlib.sha256(guess_proof).hexdigest()
+
+    return hash_proof[:6] == str(last_hash)[-6:]
 
 
 if __name__ == '__main__':
